@@ -1,0 +1,46 @@
+<div class="container">
+  <p class="title">Add New User</p>
+  <p class="description">All fields marked with * are required</p>
+  <form class="form" [formGroup]="userForm">
+    <div>
+      <mat-error
+        *ngIf="
+            (userForm.get('name')?.dirty ||
+              userForm.get('name')?.touched) &&
+            userForm.get('name')?.errors?.['required']
+          "
+      >
+        Name is required
+      </mat-error>
+      <mat-form-field appearance="outline">
+        <mat-label> Name </mat-label>
+        <input type="text" matInput formControlName="name" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label> Active </mat-label>
+        <mat-select formControlName="active">
+          <mat-option *ngFor="let option of activeOptions" [value]="option.id">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div class="buttons-container">
+    <button mat-raised-button color="primary" (click)="close()">
+      Close
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="submit()"
+      [disabled]="userForm.invalid"
+    >
+      Submit
+    </button>
+  </div>
+</div>

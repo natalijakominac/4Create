@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { map, Observable, Subscription } from 'rxjs';
 
+import { AddUserDialogComponent } from './shared/dialogs/add-user-dialog/add-user-dialog.component';
 import { User } from './shared/models/user';
 import { UsersQuery } from './shared/state/users.query';
 import { UsersService } from './shared/state/users.service';
@@ -29,7 +31,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private usersQuery: UsersQuery,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private dialog: MatDialog
   ) {
     this.usersService.setInitialUsers([
       { id: 1, name: 'Pera', active: true },
@@ -62,8 +65,9 @@ export class AppComponent implements OnInit, OnDestroy {
     );
   }
 
-
-  openAddUserDialog(): void {}
+  openAddUserDialog(): void {
+    this.dialog.open(AddUserDialogComponent);
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
