@@ -46,7 +46,12 @@ export class AppComponent implements OnInit, OnDestroy {
     );
   }
 
-  toggleUserActive(user: User): void {}
+  toggleUserActive(user: User): void {
+    this.usersService.updateUserActive(user.id, {
+      ...user,
+      active: !user.active,
+    });
+  }
 
   openAddUserDialog(): void {}
 
