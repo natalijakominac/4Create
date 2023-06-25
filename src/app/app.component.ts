@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable, Subscription } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 
 import { User } from './shared/models/user';
 import { UsersQuery } from './shared/state/users.query';
@@ -52,6 +52,16 @@ export class AppComponent implements OnInit, OnDestroy {
       active: !user.active,
     });
   }
+
+  isAddUserButtonDisabled(): Observable<boolean> {
+    return this.users$.pipe(
+      map((users: User[]) => {
+        const activeUsers = users.filter((user) => user.active);
+        return activeUsers.length !== users.length || users.length >= 5;
+      })
+    );
+  }
+
 
   openAddUserDialog(): void {}
 

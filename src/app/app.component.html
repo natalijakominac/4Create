@@ -1,6 +1,9 @@
 <div class="container">
   <div class="button-container">
-    <button mat-mini-fab (click)="openAddUserDialog()">
+    <button 
+      mat-mini-fab
+      [disabled]="isAddUserButtonDisabled() | async"
+      (click)="openAddUserDialog()">
       <mat-icon> person_add </mat-icon>
     </button>
   </div>
