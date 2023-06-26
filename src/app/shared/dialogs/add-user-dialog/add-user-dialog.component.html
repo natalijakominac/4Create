@@ -1,15 +1,13 @@
 <div class="container">
   <p class="title">Add New User</p>
   <p class="description">All fields marked with * are required</p>
-  <form class="form" [formGroup]="userForm">
+  <form [formGroup]="userForm">
     <div>
       <mat-error
         *ngIf="
             (userForm.get('name')?.dirty ||
               userForm.get('name')?.touched) &&
-            userForm.get('name')?.errors?.['required']
-          "
-      >
+            userForm.get('name')?.errors?.['required']">
         Name is required
       </mat-error>
       <mat-form-field appearance="outline">
@@ -38,8 +36,7 @@
       mat-raised-button
       color="primary"
       (click)="submit()"
-      [disabled]="userForm.invalid"
-    >
+      [disabled]="userForm.invalid">
       Submit
     </button>
   </div>
